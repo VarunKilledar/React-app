@@ -24,7 +24,7 @@ jobs:
              npm run build
         working-directory: ./demoapp 
       - name: ls
-        run: ls -a demoapp
+        run: ls -a demoapp/public
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

@@ -21,6 +21,7 @@ jobs:
           node-version: "16"
       - name: Installing dependencies
         run: npm install
+        working-directory: ./demoapp
       - name: Building project
         run: npm run build
       - name: Configure AWS Credentials

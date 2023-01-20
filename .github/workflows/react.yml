@@ -24,7 +24,7 @@ jobs:
              npm run build
         working-directory: ./demoapp 
       - name: ls
-        run: ls demoapp
+        run: ls -a demoapp
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -32,4 +32,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET }}
           aws-region: us-west-1
       - name: Copy files to the production website with the AWS CLI
-        run: aws s3 sync  s3://demoprojectreact/ 
+        run: aws s3 sync public s3://demoprojectreact/ --delete

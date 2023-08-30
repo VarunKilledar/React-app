@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    stages{
+        stage('Preprations'){
+            steps{
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url:'https://github.com/VarunKilledar/React-app.git']])
+                sh 'env'
+            }
+            
+        }
+
+        stage('Installing NPM'){
+            steps{
+                sh 'npm install'
+            }
+        }
+
+        stage('Creating Docker Container'){
+            steps{
+                sh 'docker build -t NodeApp:latest . '
+            }
+        }
+        stage('Snyk Test')
+        {
+            steps{
+                sh 'snykSecurity projectName: 'NodeApplication', severity: 'medium', snykInstallation: 'Snyk', snykTokenId: 'SnykId ', targetFile: 'DockerFile''
+            }
+        }
+    }
+}
